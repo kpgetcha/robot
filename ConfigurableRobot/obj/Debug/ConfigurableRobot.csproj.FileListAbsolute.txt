@@ -1,0 +1,6 @@
+D:\LeetCode\ConfigurableRobot\ConfigurableRobot\bin\Debug\ConfigurableRobot.exe.config
+D:\LeetCode\ConfigurableRobot\ConfigurableRobot\bin\Debug\ConfigurableRobot.exe
+D:\LeetCode\ConfigurableRobot\ConfigurableRobot\bin\Debug\ConfigurableRobot.pdb
+D:\LeetCode\ConfigurableRobot\ConfigurableRobot\obj\Debug\ConfigurableRobot.csprojResolveAssemblyReference.cache
+D:\LeetCode\ConfigurableRobot\ConfigurableRobot\obj\Debug\ConfigurableRobot.exe
+D:\LeetCode\ConfigurableRobot\ConfigurableRobot\obj\Debug\ConfigurableRobot.pdb
