@@ -18,29 +18,52 @@ namespace ConfigurableRobot
             list.Add(3);
             list.Add(4);
             //executing to sort the list
-            robot.ExecuteLogic(list, true);
+            Console.WriteLine("number of unique chips currently: " + robot.Chipcount);
+            Result result = robot.ExecuteLogic(list, true);
             Chip sumChip = new MySumChip();
             robot.AddChip(sumChip);
-            int? result = robot.ExecuteLogic(list, false);
+            result = robot.ExecuteLogic(list, false);
+            Console.WriteLine("number of unique chips currently: " + robot.Chipcount);
             Console.Read();
         }
+    }
+
+    public enum ResultType
+    {
+        SORT,
+        SUM
+    }
+
+    public class Result
+    {
+        public ResultType type;
+        public int sum;
+        public int[] sortedArray;
     }
 
     public class Robot
     {
         private Chip _chip;
+        private Dictionary<Chip, int> dict = new Dictionary<Chip, int>();
 
-        public void Sort(IList<int> list)
-        {
-            list = list.OrderBy(i => i).ToList<int>();
+        public int Chipcount 
+        { 
+            get
+            {
+                return this.dict.Count();
+            }
         }
 
         public void AddChip(Chip chip)
         {
             this._chip = chip;
+            if(!dict.ContainsKey(chip))
+            {
+                dict.Add(chip, 1);
+            }
         }
 
-        public int? ExecuteLogic(List<int> list, bool IsAcending)
+        public Result ExecuteLogic(List<int> list, bool IsAcending)
         {
             if (_chip == null)
                 return null;
@@ -49,12 +72,17 @@ namespace ConfigurableRobot
             {
                 MySortChip sortChip = (MySortChip)_chip;
                 sortChip.Work(list, IsAcending);
-                return null;
+                Result result = new Result();
+                result.type = ResultType.SORT;
+                result.sortedArray = list.ToArray();
+                return result;
             }
             else if (_chip.GetType() == typeof(MySumChip))
             {
                 MySumChip sumChip = (MySumChip)_chip;
-                int result = sumChip.Work(list);
+                Result result = new Result();
+                result.type = ResultType.SUM;
+                result.sum = sumChip.Work(list);
                 return result;
             }
 
